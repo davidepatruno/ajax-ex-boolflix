@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  var lingueSupportate = ["it", "en"];
   $('#mybutton').click(function(){
     var searchValue = $('#search').val();
     $('.wrapper_schede').html('');
@@ -23,7 +24,7 @@ $(document).ready(function(){
           {
             title: movie.title,
             original_title: movie.original_title,
-            language: lingua,
+            language: bandieraPerLingua(lingua),
             // language: bandieraPerLingua(language),
             rating: ratingInStelle(voto),
           };
@@ -37,26 +38,29 @@ $(document).ready(function(){
       },
     });
   });
-});
 
-// function bandieraPerLingua(lingua) {
-//   var htmlOutput = '';
-//   if (lingua == "en") {
-//     alert("inglese");
-//   }
-//
-//   return htmlOutput;
-// }
-
-function ratingInStelle(voto) {
-  var htmlOutput = '';
-  for (var i = 0; i < 5; i++){
-    if (i < voto){
-      htmlOutput += "<i class='fas fa-star'></i>"
+  function bandieraPerLingua(lingua) {
+    var htmlOutput = '';
+    if (lingueSupportate.includes(lingua)) {
+      htmlOutput += "<img class='bandiera' src='"+ lingua + ".png'>"
     }
     else {
-      htmlOutput += "<i class='far fa-star'></i>"
+      htmlOutput = "lingua non supportata";
     }
+
+    return htmlOutput;
   }
-  return htmlOutput;
-}
+
+  function ratingInStelle(voto) {
+    var htmlOutput = '';
+    for (var i = 0; i < 5; i++){
+      if (i < voto){
+        htmlOutput += "<i class='fas fa-star'></i>"
+      }
+      else {
+        htmlOutput += "<i class='far fa-star'></i>"
+      }
+    }
+    return htmlOutput;
+  }
+});
