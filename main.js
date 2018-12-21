@@ -15,29 +15,53 @@ $(document).ready(function(){
         var movies = data.results;
         for(var i = 0; i < movies.length; i++){
           var movie = movies[i];
-          console.log(movies[i]);
-          var voto = Math.ceil((movie.vote_average) /2);
-          var lingua = movie.original_language;
-          var source = $('#movie-template').html();
-          var template = Handlebars.compile(source);
-          var context =
-          {
-            title: movie.title,
-            original_title: movie.original_title,
-            language: bandieraPerLingua(lingua),
-            // language: bandieraPerLingua(language),
-            rating: ratingInStelle(voto),
-          };
-          var html    = template(context);
-          $('.wrapper_schede').append(html);
+          generaHtml(movie);
         }
 
+        $.ajax({
+          url: 'https://api.themoviedb.org/3/search/tv',
+          method: 'GET',
+          data: {
+            api_key: '77e9ef84dffb1c10523baea7f48cdf44',
+            language: 'it',
+            query: searchValue,
+          },
+          success: function(data){
+            var tvSeries = data.results;
+            for(var i = 0; i < tvSeries.length; i++){
+              var serie = tvSeries[i];
+              serie.title = serie.name;
+              serie.original_title = serie.original_name;
+              console.log(serie);
+              generaHtml(serie);
+            }
+          },
+          error: function(){
+            alert("qualcosa non funziona");
+          }
+        });
       },
       error: function(){
         alert("qualcosa non funziona");
       },
     });
   });
+
+  function generaHtml(oggetto) {
+    var voto = Math.ceil((oggetto.vote_average) /2);
+    var lingua = oggetto.original_language;
+    var source = $('#movie-template').html();
+    var template = Handlebars.compile(source);
+    var context =
+    {
+      title: oggetto.title,
+      original_title: oggetto.original_title,
+      language: bandieraPerLingua(lingua),
+      rating: ratingInStelle(voto),
+    };
+    var html    = template(context);
+    $('.wrapper_schede').append(html);
+  };
 
   function bandieraPerLingua(lingua) {
     var htmlOutput = '';
