@@ -15,6 +15,7 @@ $(document).ready(function(){
         var movies = data.results;
         for(var i = 0; i < movies.length; i++){
           var movie = movies[i];
+          movie.id = "Film"
           generaHtml(movie);
         }
 
@@ -27,12 +28,14 @@ $(document).ready(function(){
             query: searchValue,
           },
           success: function(data){
+            console.log(data);
             var tvSeries = data.results;
             for(var i = 0; i < tvSeries.length; i++){
               var serie = tvSeries[i];
               serie.title = serie.name;
               serie.original_title = serie.original_name;
-              console.log(serie);
+              serie.id = "Serie";
+              // console.log(serie);
               generaHtml(serie);
             }
           },
@@ -54,6 +57,7 @@ $(document).ready(function(){
     var template = Handlebars.compile(source);
     var context =
     {
+      id: oggetto.id,
       title: oggetto.title,
       original_title: oggetto.original_title,
       language: bandieraPerLingua(lingua),
