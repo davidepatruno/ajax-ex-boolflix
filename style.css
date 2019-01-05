@@ -1,9 +1,115 @@
-i {
-  font-size: 15px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Staatliches', cursive;
+}
+
+.header {
+  height: 100px;
+  background-color: black;
+}
+
+.left {
+  width: 70%;
+  float: left;
+  padding: 30px;
+}
+
+.left > h1 {
+  color: red;
+  font-size: 50px;
+}
+
+.right {
+  width: 30%;
+  float: left;
+  padding: 20px;
+}
+
+.right > h2 {
+  font-size: 20px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+#search {
+  font-size: 20px;
   color: grey;
+  /* padding: 10px; */
+  border-radius: 10px;
+  /* margin: 40px 20px; */
+  text-align: center;
+}
+
+#mybutton {
+  /* padding: 5px; */
+  height: 25px;
+  width: 50px;
+  margin-left: 20px;
+  border-radius: 10px;
+}
+
+.filler {
+  width: 100%;
+  height: calc(100vh - 100px);
+  padding: 50px;
+  background-color: grey;
+  text-align: center;
+  font-size: 40px;
+  color: lightgrey;
+}
+
+.wrapper_schede{
+  width: 100%;
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .bandiera {
   width: 20px;
   height: 10px;
+}
+
+.scheda {
+  width: 185px;
+  height: 285px;
+}
+
+.locandina{
+  cursor: pointer;
+  padding: 20px 20px;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+}
+
+.dettagli{
+  display: none;
+  list-style: none;
+  color: white;
+}
+
+.dettagli > li {
+  margin: 5px;
+}
+
+.dettagli.active {
+  display: block;
+  width: 185px;
+  height: 280px;
+  background-color: grey;
+}
+.unactive {
+  display: none;
+}
+
+.locandina.displaynone {
+  display: none;
+}
+
+.locandina.displayblock {
+  display: block;
 }

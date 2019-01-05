@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
@@ -10,21 +11,38 @@
     <title>Boolflix</title>
   </head>
   <body>
-    <input id="search" type="text">
-    <button id="mybutton" type="button" name="button">cerca</button>
+    <div class="header">
+      <div class="header left">
+        <h1>BOOLFLIX</h1>
+      </div>
+      <div class="header right">
+        <h2>Cerca qui il film o la serie che preferisci</h2>
+        <input id="search" type="text">
+        <button id="mybutton" type="button" name="button">cerca</button>
+      </div>
+    </div>
+    <div class="filler">
+      <p>Il miglior portale di ricerca Film e Serie tv</p>
+    </div>
+
 
     <div class="wrapper_schede">
 
     </div>
 
     <script id="movie-template" type="text/x-handlebars-template">
-      <ul>
-        <li>Tipo: {{id}}</li>
-        <li>Titolo: {{title}}</li>
-        <li>Titolo Originale: {{original_title}}</li>
-        <li>Lingua: {{{language}}}</li>
-        <li>Voto: {{{rating}}}</li>
-      </ul>
+      <div class="scheda">
+        <div class="locandina">
+          <img src="{{poster}}" alt="{{original_title}}">
+        </div>
+        <ul class="dettagli">
+          <li>Tipo: {{id}}</li>
+          <li>Titolo: {{title}}</li>
+          <li>Titolo Originale: {{original_title}}</li>
+          <li>Lingua: {{{language}}}</li>
+          <li>Voto: {{{rating}}}</li>
+        </ul>
+      </div>
     </script>
 
     <script src="main.js"></script>

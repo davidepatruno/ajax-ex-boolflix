@@ -1,6 +1,7 @@
 $(document).ready(function(){
   var lingueSupportate = ["it", "en"];
   $('#mybutton').click(function(){
+    $('.filler').addClass('unactive');
     var searchValue = $('#search').val();
     $('.wrapper_schede').html('');
     $.ajax({
@@ -48,6 +49,22 @@ $(document).ready(function(){
         alert("qualcosa non funziona");
       },
     });
+
+    $(document).on('mouseenter','.scheda',function(){
+      // alert("funzia");
+      $(this).children('.dettagli').addClass('active');
+      $(this).children('.locandina').addClass('displaynone');
+      $(this).children('.dettagli').removeClass('unactive');
+      $(this).children('.locandina').removeClass('displayblock');
+    });
+
+    $(document).on('mouseleave','.scheda',function(){
+      $(this).children('.dettagli').removeClass('active');
+      $(this).children('.locandina').removeClass('displaynone');
+      $(this).children('.dettagli').addClass('unactive');
+      $(this).children('.locandina').addClass('displayblock');
+    });
+
   });
 
   function generaHtml(oggetto) {
@@ -55,6 +72,7 @@ $(document).ready(function(){
     var lingua = oggetto.original_language;
     var source = $('#movie-template').html();
     var template = Handlebars.compile(source);
+    var urlPoster = 'https://image.tmdb.org/t/p/w185/' + oggetto.poster_path;
     var context =
     {
       id: oggetto.id,
@@ -62,6 +80,7 @@ $(document).ready(function(){
       original_title: oggetto.original_title,
       language: bandieraPerLingua(lingua),
       rating: ratingInStelle(voto),
+      poster: urlPoster,
     };
     var html    = template(context);
     $('.wrapper_schede').append(html);
